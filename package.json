@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mstreich/ms/issues"
   },
-  "homepage": "https://github.com/mstreich/ms#readme"
+  "homepage": "https://github.com/mstreich/ms#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13"
+  }
 }
