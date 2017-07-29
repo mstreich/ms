@@ -1,0 +1,7 @@
+{
+  "name": "ms",
+  "short_name": "ms",
+  "description": "Marek Streich homepage",
+  "start_url": "/",
+  "display": "standalone"
+}
