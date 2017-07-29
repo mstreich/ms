@@ -1,0 +1,65 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../../src/components/ms-styles/ms-styles.html">
+
+<dom-module id="ms-view-picker">
+	<template>
+		<style include="ms-styles">
+
+			.views {
+				@apply --layout-horizontal;
+				@apply --layout-center;
+				@apply --layout-justified;
+				width: 100vw;
+				height: 100vh;
+			}
+
+			.view {
+				@apply --layout-flex-3;
+				@apply --shadow-elevation-24dp;
+				height: 100vh;
+				background: var(--ms-grey-100);
+				transition: flex 0.2s;
+			}
+
+			.view:hover {
+				@apply --layout-flex-4;
+				transition: flex 0.2s;
+			}
+
+			.views[narrow] {
+				@apply --layout-vertical;
+			}
+
+			.views[narrow] .view {
+				width: 100vw;
+				height: auto;
+			}
+
+		</style>
+
+		<iron-media-query query="(max-width: 900px)" query-matches="{{narrow}}"></iron-media-query>
+
+		<div class="views" narrow$="[[narrow]]">
+			<div class="view">dev</div>
+			<div class="view">salsa</div>		
+		</div>
+
+	</template>
+
+	<script>
+		/**
+		* @customElement
+		* @polymer
+		*/
+		class MsViewPicker extends Polymer.Element {
+			static get is() { return 'ms-view-picker'; }
+			static get properties() {
+				return {
+				};
+			}
+		}
+		window.customElements.define(MsViewPicker.is, MsViewPicker);
+	</script>
+</dom-module>

@@ -1,20 +1,33 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+	<head>
 
-    <title>Marek Streich</title>
-    <meta name="description" content="Marek Streich homepage">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="/manifest.json">
+		<title>Marek Streich</title>
+		<meta name="description" content="Marek Streich homepage">
 
-    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+		<link rel="manifest" href="/manifest.json">
+		<script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <link rel="import" href="/src/ms-app/ms-app.html">
-  </head>
-  <body>
-    <ms-app></ms-app>
-  </body>
+		<style>
+			html {
+				overflow-y: scroll;
+				overflow-x: hidden;
+			}
+			html, body {
+				margin: 0;
+  				height: 100vh;
+			}
+		</style>
+
+		<link rel="import" href="/src/ms-app.html">
+
+	</head>
+
+	<body>
+		<ms-app></ms-app>
+	</body>
+
 </html>
