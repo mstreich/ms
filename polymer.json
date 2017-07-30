@@ -6,8 +6,7 @@
 		"src/pages/ms-salsa-view.html"
 	],
 	"sources": [
-		"src/**/*",
-		"bower.json"
+		"src/**/*"
 	],
 	"extraDependencies": [
 		"manifest.json",
