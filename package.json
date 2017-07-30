@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "polymer serve | npm run watch",
     "test": "polymer test",
-    "watch": "browser-sync start --proxy localhost:8081 --files \"src/**/*.*, index.html, *.js\""
+    "watch": "browser-sync start --proxy localhost:8081 --files \"src/**/*.*, index.html, *.js\"",
+    "deploy": "polymer build --preset es5-bundled | firebase deploy"
   },
   "repository": {
     "type": "git",

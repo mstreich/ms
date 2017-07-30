@@ -2,6 +2,9 @@
 bower_components/
 node_modules/
 
+# Build
+build/
+
 # Sublime
 *.sublime-project
 *.sublime-workspace
