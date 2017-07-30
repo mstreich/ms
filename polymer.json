@@ -1,7 +1,21 @@
 {
-  "lint": {
-    "rules": [
-      "polymer-2"
-    ]
-  }
+	"entrypoint": "index.html",
+	"shell": "src/ms-app.html",
+	"fragments": [
+		"src/pages/ms-dev-view.html",
+		"src/pages/ms-salsa-view.html"
+	],
+	"sources": [
+		"src/**/*",
+		"bower.json"
+	],
+	"extraDependencies": [
+		"manifest.json",
+		"bower_components/webcomponentsjs/*.js"
+	],
+	"lint": {
+		"rules": [
+			"polymer-2"
+		]
+	}
 }

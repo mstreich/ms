@@ -1,0 +1,111 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../../src/components/ms-styles/ms-styles.html">
+
+<dom-module id="ms-views">
+
+	<template>
+
+		<style include="ms-styles">
+
+			/* VIEWS */
+
+			:host {
+
+				@apply --layout-horizontal;
+				@apply --layout-center;
+				@apply --layout-justified;
+				width: 100vw;
+				height: 100vh;
+
+				--regular-flex: 3;
+				--hovered-flex: 4;
+				--selected-flex: 50;
+
+				--none: { -ms-flex: 0; -webkit-flex: 0; flex: 0; };
+				--regular: { -ms-flex: var(--regular-flex); -webkit-flex: var(--regular-flex); flex: var(--regular-flex); };
+				--hovered: { -ms-flex: var(--hovered-flex); -webkit-flex: var(--hovered-flex); flex: var(--hovered-flex); };
+				--selected: { -ms-flex: var(--selected-flex); -webkit-flex: var(--selected-flex); flex: var(--selected-flex); };
+
+			}
+
+			/* VIEW */
+
+			:host > ::slotted(*) {
+				@apply --regular;
+				@apply --shadow-elevation-24dp;
+				@apply --layout-self-stretch;
+				position: relative;
+				overflow: hidden;
+				cursor: pointer;
+				background: white;
+				transition: flex 0.2s;
+			}
+
+			:host > ::slotted(*:hover) {
+				@apply --hovered;
+				transition: flex 0.2s;
+			}
+
+			:host > ::slotted(*[selected]) {
+				@apply --selected;
+				cursor: default;
+				transition: flex 0.2s;
+			}
+
+			/* NARROW */
+
+			:host([narrow]) {
+				@apply --layout-vertical;
+			}
+
+			:host([narrow]) > ::slotted(*) {
+				@apply --regular;
+				transition: flex 0.2s;
+			}
+
+			:host([narrow][selected]) > ::slotted(*) {
+				@apply --none;
+				transition: flex 0.2s;
+			}
+
+			:host([narrow][selected]) > ::slotted(*[selected]) {
+				@apply --selected;
+				transition: flex 0.2s;
+			}
+
+		</style>
+
+		<iron-media-query query="(max-width: 900px)" query-matches="{{narrow}}"></iron-media-query>
+
+		<slot></slot>
+
+	</template>
+
+	<script>
+
+		class MsViews extends Polymer.Element {
+
+			static get is () { return 'ms-views'; }
+
+			static get properties () {
+				return {
+					narrow: {
+						type: Boolean,
+						reflectToAttribute: true
+					},
+					selected: {
+						type: Boolean,
+						reflectToAttribute: true
+					}
+				};
+			}
+
+		}
+
+		window.customElements.define(MsViews.is, MsViews);
+
+	</script>
+
+</dom-module>

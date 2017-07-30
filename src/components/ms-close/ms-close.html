@@ -1,0 +1,50 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../../src/components/ms-styles/ms-styles.html">
+
+<dom-module id="ms-close">
+
+	<template>
+
+		<style include="ms-styles">
+
+			:host {
+				@apply --layout-wrapper;
+				cursor: pointer;
+			}
+
+			svg path {
+				fill: var(--ms-grey-900);
+				transition: fill 0.2s;
+			}
+
+			svg:hover path {
+				fill: var(--ms-grey-700);
+				transition: fill 0.2s;
+			}
+
+		</style>
+
+		<svg viewBox="5, 5, 14, 14">
+			<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+		</svg>
+
+	</template>
+
+	<script>
+
+		class MsClose extends Polymer.Element {
+
+			static get is() { return 'ms-close'; }
+
+			static get properties() {
+				return {
+				};
+			}
+		}
+
+		window.customElements.define(MsClose.is, MsClose);
+
+	</script>
+
+</dom-module>

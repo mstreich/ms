@@ -1,11 +1,40 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="./components/ms-view-picker/ms-view-picker.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../src/components/ms-views/ms-views.html">
+<link rel="import" href="../src/components/ms-view-wrapper/ms-view-wrapper.html">
+
+<link rel="lazy-import" href="./pages/ms-dev-view.html">
+<link rel="lazy-import" href="./pages/ms-salsa-view.html">
 
 <dom-module id="ms-app">
 
 	<template>
 
-		<ms-view-picker></ms-view-picker>
+		<app-location route="{{route}}"></app-location>
+		<app-route route="{{route}}" pattern="/:page" data="{{routeData}}"></app-route>
+
+		<ms-views selected$="[[page]]">
+
+			<ms-view-wrapper selected$="[[_isSelected(page, 'dev')]]">
+				
+				<a href="/dev" slot="link"></a>
+
+				<ms-dev-view slot="view"></ms-dev-view>
+
+			</ms-view-wrapper>
+
+			<ms-view-wrapper selected$="[[_isSelected(page, 'salsa')]]">
+				
+				<a href="/salsa" slot="link"></a>
+
+				<ms-salsa-view slot="view"></ms-salsa-view>
+
+			</ms-view-wrapper>
+
+		</ms-views>
 
 	</template>
 
@@ -17,12 +46,38 @@
 
 			static get properties() {
 				return {
-					who: {
+					page: {
 						type: String,
-						value: 'world'
+						reflectToAttribute: true,
+						observer: '_pageChanged',
+					},
+					routeData: {
+						type: Object
 					}
 				};
 			}
+
+			static get observers() {
+				return [
+					'_routePageChanged(routeData.page)',
+				];
+			}
+
+			_routePageChanged(page) {
+				this.page = page && page.length ? page : null;
+			}
+
+			_pageChanged(page) {
+				if (page && page.length) {
+					var resolvedPageUrl = this.resolveUrl('pages/ms-' + page + '-view.html');
+					Polymer.importHref(resolvedPageUrl, null, null, true);
+				}
+			}
+
+			_isSelected (current, page) {
+				return current === page;
+			}
+
 		}
 
 		window.customElements.define(MsApp.is, MsApp);
