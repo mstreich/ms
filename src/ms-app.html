@@ -2,12 +2,19 @@
 <link rel="import" href="./components/ms-view-picker/ms-view-picker.html">
 
 <dom-module id="ms-app">
+
 	<template>
+
 		<ms-view-picker></ms-view-picker>
+
 	</template>
+
 	<script>
+
 		class MsApp extends Polymer.Element {
+
 			static get is() { return 'ms-app'; }
+
 			static get properties() {
 				return {
 					who: {
@@ -17,6 +24,9 @@
 				};
 			}
 		}
+
 		window.customElements.define(MsApp.is, MsApp);
+
 	</script>
+
 </dom-module>

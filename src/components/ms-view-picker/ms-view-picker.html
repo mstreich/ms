@@ -2,12 +2,27 @@
 <link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../../bower_components/paper-styles/shadow.html">
 <link rel="import" href="../../../src/components/ms-styles/ms-styles.html">
+<link rel="import" href="../../../src/components/ms-view-wrapper/ms-view-wrapper.html">
 
 <dom-module id="ms-view-picker">
+
 	<template>
+
 		<style include="ms-styles">
 
-			.views {
+			:host {
+
+				--regular-flex: 20;
+				--hovered-flex: 21;
+				--selected-flex: 300;
+
+				--regular: { -ms-flex: var(--regular-flex); -webkit-flex: var(--regular-flex); flex: var(--regular-flex); };
+				--hovered: { -ms-flex: var(--hovered-flex); -webkit-flex: var(--hovered-flex); flex: var(--hovered-flex); };
+				--selected: { -ms-flex: var(--selected-flex); -webkit-flex: var(--selected-flex); flex: var(--selected-flex); };
+
+			}
+
+			views {
 				@apply --layout-horizontal;
 				@apply --layout-center;
 				@apply --layout-justified;
@@ -15,51 +30,106 @@
 				height: 100vh;
 			}
 
-			.view {
-				@apply --layout-flex-3;
+			views[narrow] {
+				@apply --layout-vertical;
+			}
+
+			view {
+				@apply --regular;
 				@apply --shadow-elevation-24dp;
-				height: 100vh;
+				@apply --layout-self-stretch;
+				position: relative;
+				overflow: hidden;
 				background: var(--ms-grey-100);
 				transition: flex 0.2s;
 			}
 
-			.view:hover {
-				@apply --layout-flex-4;
+			view:hover {
+				@apply --hovered;
 				transition: flex 0.2s;
 			}
 
-			.views[narrow] {
-				@apply --layout-vertical;
+			view[selected] {
+				@apply --selected;
+				transition: flex 0.2s;
 			}
 
-			.views[narrow] .view {
-				width: 100vw;
-				height: auto;
+			close {
+				position: absolute;
+				top: -2rem;
+				right: 1rem;
+				height: 2rem;
+				width: 2rem;
+				background: var(--ms-grey-500);
+				cursor: pointer;
+				transition: top 0.2s ease-out 0s;
+			}
+
+			view[selected] close {
+				top: 1rem;
+				transition: top 0.2s ease-in 0.2s;
+			}
+
+			ms-view-wrapper {
+				@apply --layout-fit;
 			}
 
 		</style>
 
 		<iron-media-query query="(max-width: 900px)" query-matches="{{narrow}}"></iron-media-query>
 
-		<div class="views" narrow$="[[narrow]]">
-			<div class="view">dev</div>
-			<div class="view">salsa</div>		
-		</div>
+		<views narrow$="[[narrow]]">
+
+			<view selected$="[[_isSelected(selected, '0')]]">
+
+				<ms-view-wrapper on-click="_select" data-index="0" expand$="[[_isSelected(selected, '0')]]"></ms-view-wrapper>
+				
+				<close on-click="_close"></close>
+
+			</view>
+
+			<view on-click="_select" selected$="[[_isSelected(selected, '1')]]">
+
+				<ms-view-wrapper on-click="_select" data-index="1" expand$="[[_isSelected(selected, '0')]]"></ms-view-wrapper>
+				
+				<close on-click="_close"></close>
+
+			</view>
+
+		</views>
 
 	</template>
 
 	<script>
-		/**
-		* @customElement
-		* @polymer
-		*/
+
 		class MsViewPicker extends Polymer.Element {
-			static get is() { return 'ms-view-picker'; }
-			static get properties() {
+
+			static get is () { return 'ms-view-picker'; }
+
+			static get properties () {
 				return {
+					selected: {
+						type: String
+					}
 				};
 			}
+
+			_select (e) {
+				this.selected = e.target.getAttribute('data-index');
+			}
+
+			_close () {
+				this.selected = null;
+			}
+
+			_isSelected (selected, index) {
+				return selected === index;
+			}
+
 		}
+
 		window.customElements.define(MsViewPicker.is, MsViewPicker);
+
 	</script>
+
 </dom-module>

@@ -1,0 +1,35 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../src/components/ms-styles/ms-styles.html">
+
+<dom-module id="ms-view-wrapper">
+
+	<template>
+
+		<style include="ms-styles">
+
+		</style>
+
+		<iron-media-query query="(max-width: 900px)" query-matches="{{narrow}}"></iron-media-query>
+
+		bello!
+
+	</template>
+
+	<script>
+
+		class MsViewWrapper extends Polymer.Element {
+
+			static get is() { return 'ms-view-wrapper'; }
+
+			static get properties() {
+				return {
+				};
+			}
+		}
+
+		window.customElements.define(MsViewWrapper.is, MsViewWrapper);
+
+	</script>
+
+</dom-module>
