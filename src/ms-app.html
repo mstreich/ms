@@ -6,6 +6,7 @@
 
 <link rel="import" href="../src/components/ms-views/ms-views.html">
 <link rel="import" href="../src/components/ms-view-wrapper/ms-view-wrapper.html">
+<link rel="import" href="../src/components/ms-styles/ms-styles.html">
 
 <link rel="lazy-import" href="./pages/ms-dev-view.html">
 <link rel="lazy-import" href="./pages/ms-salsa-view.html">
@@ -13,6 +14,14 @@
 <dom-module id="ms-app">
 
 	<template>
+
+		<style include="ms-styles">
+			
+			:host {
+				@apply --layout-fit;
+			}
+
+		</style>
 
 		<app-location route="{{route}}"></app-location>
 		<app-route route="{{route}}" pattern="/:page" data="{{routeData}}"></app-route>

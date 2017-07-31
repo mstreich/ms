@@ -82,8 +82,19 @@
 				transition: top 0.2s ease 0s;
 			}
 
+			:host([narrow]) .close {
+				right: 0.5rem;
+				height: 1rem;
+				width: 1rem;
+			}
+
 			:host([selected]) .close {
 				top: 1rem;
+				transition: top 0.2s ease 0.2s;
+			}
+
+			:host([narrow][selected]) .close {
+				top: 0.5rem;
 				transition: top 0.2s ease 0.2s;
 			}
 
