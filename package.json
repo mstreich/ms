@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "polymer serve | npm run watch",
+    "add": "git add --all",
     "test": "polymer test",
-    "save": "git add --all | git commit -m 'updates and improvements'",
     "push": "git push -u origin master",
     "watch": "browser-sync start --proxy localhost:8081 --files \"src/**/*.*, index.html, *.js\"",
-    "deploy": "polymer build --preset es5-bundled | firebase deploy"
+    "build": "polymer build --preset es5-bundled",
+    "deploy": "firebase deploy",
+    "commit": "git commit -m 'updates and improvements'"
   },
   "repository": {
     "type": "git",
