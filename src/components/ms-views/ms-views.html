@@ -51,14 +51,16 @@
 			:host > ::slotted(*[selected]) {
 				@apply --selected;
 				cursor: default;
-				transition: flex 0.2s;
+				transition: flex 0.2s ease 0.2s;
 			}
 
 			/* NARROW */
 
+			/*
 			:host([narrow]) {
 				@apply --layout-vertical;
 			}
+			*/
 
 			:host([narrow]) > ::slotted(*) {
 				@apply --regular;

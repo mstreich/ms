@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 
 <link rel="import" href="../src/components/ms-views/ms-views.html">
 <link rel="import" href="../src/components/ms-view-wrapper/ms-view-wrapper.html">
@@ -18,19 +19,23 @@
 
 		<ms-views selected$="[[page]]">
 
-			<ms-view-wrapper selected$="[[_isSelected(page, 'dev')]]">
+			<ms-view-wrapper selected$="[[_isSelected(page, 'dev')]]" not-selected$="[[_isNotSelected(page, 'dev')]]" title="Front-man Dev">
 				
 				<a href="/dev" slot="link"></a>
 
 				<ms-dev-view slot="view"></ms-dev-view>
 
+				<iron-image slot="img" sizing="cover" src="../img/dev.jpg"></iron-image>
+
 			</ms-view-wrapper>
 
-			<ms-view-wrapper selected$="[[_isSelected(page, 'salsa')]]">
+			<ms-view-wrapper selected$="[[_isSelected(page, 'salsa')]]" not-selected$="[[_isNotSelected(page, 'salsa')]]" title="Salsa">
 				
 				<a href="/salsa" slot="link"></a>
 
 				<ms-salsa-view slot="view"></ms-salsa-view>
+
+				<iron-image slot="img" sizing="cover" src="../img/salsa.jpg"></iron-image>
 
 			</ms-view-wrapper>
 
@@ -76,6 +81,10 @@
 
 			_isSelected (current, page) {
 				return current === page;
+			}
+
+			_isNotSelected (current, page) {
+				return current && current !== page;
 			}
 
 		}

@@ -1,0 +1,75 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../src/components/ms-styles/ms-styles.html">
+
+<dom-module id="ms-view-content">
+
+	<template>
+
+		<style include="ms-styles">
+
+			:host {
+				@apply --layout-block;
+				@apply --layout-relative;
+				max-width: 40rem;
+				padding: 4rem;
+				margin: 0 auto;
+			}
+
+			::slotted(h1) {
+				@apply --ms-h1;
+				margin-bottom: 0;
+			}
+
+			::slotted(h2) {
+				@apply --ms-h2;
+				margin-bottom: 2rem;
+			}
+
+			::slotted(p) {
+				@apply --ms-p;
+			}
+
+			/* NARROW */
+
+			:host([narrow]) ::slotted(h1) {
+				@apply --ms-h1-narrow;
+			}
+
+			:host([narrow]) ::slotted(h2) {
+				@apply --ms-h2-narrow;
+			}
+
+			:host([narrow]) ::slotted(p) {
+				@apply --ms-p-narrow;
+			}
+
+		</style>
+
+		<iron-media-query query="(max-width: 900px)" query-matches="{{narrow}}"></iron-media-query>
+
+		<slot></slot>
+
+	</template>
+
+	<script>
+
+		class MsViewContent extends Polymer.Element {
+
+			static get is() { return 'ms-view-content'; }
+
+			static get properties() {
+				return {
+					narrow: {
+						type: Boolean,
+						reflectToAttribute: true
+					}
+				};
+			}
+		}
+
+		window.customElements.define(MsViewContent.is, MsViewContent);
+
+	</script>
+
+</dom-module>

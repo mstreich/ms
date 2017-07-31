@@ -10,7 +10,8 @@
 		<style include="ms-styles">
 
 			:host {
-				@apply --layout-wrapper;
+				@apply --layout-block;
+				@apply --layout-relative;
 			}
 
 			/* VIEW */
@@ -19,21 +20,55 @@
 				position: relative;
 			}
 
-			/* LINK */
+			/* OVERLAY */
 
-			.link::slotted(a) {
+			.overlay {
 				position: absolute;
 				top: 0;
 				width: 100%;
 				height: 100%;
 				left: 0;
-				background: var(--ms-grey-100);
 				transition: top 0.2s;
 			}
 
-			:host([selected]) .link::slotted(a) {
+			:host([selected]) .overlay {
 				top: -100%;
 				transition: top 0.2s ease 0.2s;
+			}
+
+			/* IMAGE */
+
+			.img::slotted(iron-image) {
+				@apply --layout-fit;
+			}
+
+			/* TITLE */
+
+			.title {
+				@apply --layout;
+				@apply --layout-fit;
+				@apply --layout-center-center;
+				@apply --heading;
+				font-size: 2rem;
+				color: white;
+				text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+				transition: opacity 0.2s ease 0.2s;
+			}
+
+			:host([not-selected]) .title {
+				opacity: 0;
+				transition: opacity 0.2s;
+			}
+
+			:host([narrow]) .title {
+				font-size: 1rem;
+			}
+
+			/* LINK */
+
+			.link::slotted(a) {
+				@apply --layout-fit;
+				cursor: pointer;
 			}
 
 			/* CLOSE */
@@ -54,11 +89,23 @@
 
 		</style>
 
-		<div class="view">
-			<slot name="view"></slot>
-		</div>		
+		<iron-media-query query="(max-width: 900px)" query-matches="{{narrow}}"></iron-media-query>
 
-		<slot name="link" class="link"></slot>
+		<div class="view">
+
+			<slot name="view"></slot>
+
+		</div>
+
+		<div class="overlay">
+
+			<slot name="img" class="img"></slot>
+
+			<div class="title">[[title]]</div>
+
+			<slot name="link" class="link"></slot>
+			
+		</div>	
 
 		<a href="/" class="close">
 			<ms-close></ms-close>
@@ -74,9 +121,20 @@
 
 			static get properties() {
 				return {
+					narrow: {
+						type: Boolean,
+						reflectToAttribute: true
+					},
 					selected: {
 						type: Boolean,
 						reflectToAttribute: true
+					},
+					notSelected: {
+						type: Boolean,
+						reflectToAttribute: true
+					},
+					title: {
+						type: String
 					}
 				};
 			}

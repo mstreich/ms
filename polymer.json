@@ -6,6 +6,7 @@
 		"src/pages/ms-salsa-view.html"
 	],
 	"sources": [
+		"img/**/*",
 		"src/**/*"
 	],
 	"extraDependencies": [
