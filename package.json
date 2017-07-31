@@ -8,6 +8,7 @@
     "add": "git add --all",
     "test": "polymer test",
     "push": "git push -u origin master",
+    "done": "npm run save && npm run deploy",
     "save": "npm run add && npm run commit && npm run push",
     "watch": "browser-sync start --proxy localhost:8081 --files \"src/**/*.*, index.html, *.js\"",
     "deploy": "polymer build --preset es5-bundled && firebase deploy",
